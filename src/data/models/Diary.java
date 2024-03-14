@@ -1,4 +1,5 @@
-package models;
+package data.models;
 
 public class Diary {
+
 }

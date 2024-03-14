@@ -1,6 +1,8 @@
 package repositories;
 
-import models.Diary;
+import data.models.Diary;
+
+import java.util.List;
 
 public interface DiaryRepository {
     Diary save(Diary diary);
