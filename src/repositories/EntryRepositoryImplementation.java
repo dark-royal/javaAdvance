@@ -3,14 +3,17 @@ package repositories;
 import data.models.Diary;
 import data.models.Entry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntryRepositoryImplementation implements EntryRepository{
-
+private List<Entry> entries = new ArrayList<>();
 
     @Override
     public Entry save(Entry entry) {
-        return null;
+        entries.add(entry);
+        return entry;
+
     }
 
     @Override
@@ -20,16 +23,23 @@ public class EntryRepositoryImplementation implements EntryRepository{
 
     @Override
     public Entry findById(int id) {
-        return null;
+        for (Entry entry : entries) {
+            if (entry.getId() == id) ;
+
+        }
+
     }
 
     @Override
     public long count() {
-        return 0;
+        return entries.size();
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(int id) {
+            entries.remove(id);
+
+
 
     }
 

@@ -10,7 +10,7 @@ public interface EntryRepository {
     List<Diary> findAll();
     Entry findById(int id);
     long count();
-    void delete(String id);
+    void delete(int id);
     void delete(Entry entry);
 
 
