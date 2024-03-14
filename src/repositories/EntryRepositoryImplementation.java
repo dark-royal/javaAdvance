@@ -17,16 +17,19 @@ private List<Entry> entries = new ArrayList<>();
     }
 
     @Override
-    public List<Diary> findAll() {
-        return null;
+    public List<Entry> findAll() {
+        return new ArrayList<>(entries);
     }
 
     @Override
     public Entry findById(int id) {
         for (Entry entry : entries) {
-            if (entry.getId() == id) ;
+            if (entry.getId() == id) {
+                return entry;
+            }
 
         }
+        return null;
 
     }
 
@@ -37,14 +40,16 @@ private List<Entry> entries = new ArrayList<>();
 
     @Override
     public void delete(int id) {
-            entries.remove(id);
-
+        Entry entry = findById(id);
+        entries.remove(entry);
 
 
     }
 
     @Override
     public void delete(Entry entry) {
+        entries.remove(entry);
+
 
     }
 }
