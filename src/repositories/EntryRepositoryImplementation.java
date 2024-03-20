@@ -18,7 +18,7 @@ private List<Entry> entries = new ArrayList<>();
 
     @Override
     public List<Entry> findAll() {
-        return new ArrayList<>(entries);
+        return entries;
     }
 
     @Override
