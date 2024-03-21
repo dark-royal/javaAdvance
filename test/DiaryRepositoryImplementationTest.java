@@ -15,7 +15,7 @@ public class DiaryRepositoryImplementationTest {
     }
     @Test
     public void testDiaryCanAddDiary(){
-        Diary diary = new Diary("username","password");
+        Diary diary = new Diary();
         repository.save(diary);
         assertEquals(1,repository.count());
 
@@ -23,18 +23,20 @@ public class DiaryRepositoryImplementationTest {
 
     @Test
     public void testDiariesCanAddTwoDiary(){
-        Diary diary = new Diary("username","password");
+        Diary diary = new Diary();
         repository.save(diary);
-        Diary diary1 = new Diary("bimbim","1234");
+        Diary diary1 = new Diary();
         repository.save(diary1);
         assertEquals(2,repository.count());
     }
 
     @Test
     public void testDiariesCanAddTwoDiary_findOneDiary(){
-        Diary diary = new Diary("username","password");
+        Diary diary = new Diary();
+        diary.setUsername("username1");
         repository.save(diary);
-        Diary diary1 = new Diary("username","password");
+        Diary diary1 = new Diary();
+        diary1.setUsername("username");
         repository.save(diary1);
         assertEquals(2,repository.count());
         Diary foundDiary = repository.findByUsername("username");
@@ -44,9 +46,11 @@ public class DiaryRepositoryImplementationTest {
 
     @Test
     public void testDiariesCanAddTwoDiary_findSecondDiary_DeleteFoundDiary(){
-        Diary diary = new Diary("username","password");
+        Diary diary = new Diary();
+        diary.setUsername("username");
         repository.save(diary);
-        Diary diary1 = new Diary("username","password");
+        Diary diary1 = new Diary();
+        diary1.setUsername("username1");
         repository.save(diary1);
         assertEquals(2,repository.count());
         repository.delete("username");
@@ -56,9 +60,11 @@ public class DiaryRepositoryImplementationTest {
 
     @Test
     public void testDiariesCanAddTwoDiary_DeleteTwoDiary(){
-        Diary diary = new Diary("username","password");
+        Diary diary = new Diary();
+        diary.setUsername("username");
         repository.save(diary);
-        Diary diary1 = new Diary("username1","password1");
+        Diary diary1 = new Diary();
+        diary1.setUsername("username1");
         repository.save(diary1);
         assertEquals(2,repository.count());
         repository.delete("username");
@@ -68,10 +74,12 @@ public class DiaryRepositoryImplementationTest {
     }
 
     @Test
-    public void testDiariesCanAddTwoDiaries_deleteDiaryUsinObject(){
-        Diary diary = new Diary("username","password");
+    public void testDiariesCanAddTwoDiaries_deleteDiaryUsingObject(){
+        Diary diary = new Diary();
+        diary.setUsername("username");
         repository.save(diary);
-        Diary diary1 = new Diary("username1","password1");
+        Diary diary1 = new Diary();
+        diary1.setUsername("username1");
         repository.save(diary1);
         assertEquals(2,repository.count());
         repository.delete(diary);
@@ -81,9 +89,11 @@ public class DiaryRepositoryImplementationTest {
     }
     @Test
     public void testDiariesCanFindAllDiaryInTheDiary(){
-    Diary diary = new Diary("username","password");
+    Diary diary = new Diary();
+    diary.setUsername("username");
         repository.save(diary);
-    Diary diary1 = new Diary("username1","password1");
+    Diary diary1 = new Diary();
+    diary1.setUsername("username1");
         repository.save(diary1);
     assertEquals(2,repository.count());
         repository.findAll();
@@ -93,11 +103,13 @@ public class DiaryRepositoryImplementationTest {
 
     @Test
     public void testDiariesCanSaveNoDiary_FindAllDiaryInTheDiary(){
-//        Diary diary = new Diary("username","password");
-//        repository.save(diary);
-//        Diary diary1 = new Diary("username1","password1");
-//        repository.save(diary1);
-//        assertEquals(2,repository.count());
+        Diary diary = new Diary();
+        diary.setUsername("username");
+        repository.save(diary);
+        Diary diary1 = new Diary();
+        diary1.setUsername("username1");
+       repository.save(diary1);
+        assertEquals(2,repository.count());
         repository.findAll();
         assertEquals(0,repository.count());
 
@@ -105,9 +117,11 @@ public class DiaryRepositoryImplementationTest {
 
     @Test
     public void testDiariesCanSaveDiary_DeleteDiary_FindAllDiaryInTheDiaries(){
-        Diary diary = new Diary("username","password");
+        Diary diary = new Diary();
+        diary.setUsername("username");
         repository.save(diary);
-        Diary diary1 = new Diary("username1","password1");
+        Diary diary1 = new Diary();
+        diary1.setUsername("username1");
         repository.save(diary1);
         assertEquals(2,repository.count());
         repository.delete("username");
@@ -118,9 +132,11 @@ public class DiaryRepositoryImplementationTest {
 
     @Test
     public void testDiariesCanSaveDiary_findDiaryByUsername_deleteDiaryByUsernameAndObject_FindAllDiaryInTheDiary(){
-        Diary diary = new Diary("username","password");
+        Diary diary = new Diary();
+        diary.setUsername("username");
         repository.save(diary);
-        Diary diary1 = new Diary("username1","password1");
+        Diary diary1 = new Diary();
+        diary1.setUsername("username1");
         repository.save(diary1);
         assertEquals(2,repository.count());
         repository.findByUsername("username");

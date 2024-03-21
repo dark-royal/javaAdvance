@@ -5,11 +5,19 @@ public class Diary {
 
     private  String username;
     private  String password;
+    private boolean logStatus;
 
+    public boolean isLogStatus() {
+        return logStatus;
+    }
 
-    public Diary(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public boolean setLogStatus(boolean logStatus) {
+        this.logStatus = logStatus;
+        return logStatus;
+    }
+
+    public Diary() {
+
 
     }
 

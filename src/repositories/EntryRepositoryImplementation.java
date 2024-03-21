@@ -11,7 +11,15 @@ private List<Entry> entries = new ArrayList<>();
 
     @Override
     public Entry save(Entry entry) {
-        entries.add(entry);
+        for (Entry entry1 : entries){
+            if (entry.getId() == entry1.getId()){
+                entries.set(entries.indexOf(entry), entry);
+            }else {
+                entries.add(entry);
+            }
+
+
+        }
         return entry;
 
     }

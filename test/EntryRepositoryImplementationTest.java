@@ -31,6 +31,8 @@ public class EntryRepositoryImplementationTest {
 
     }
 
+
+
     @Test
     public void testThatEntryCanAddTwoEntry_removeOneEntry() {
         Entry entry = new Entry(1, "title", "body");

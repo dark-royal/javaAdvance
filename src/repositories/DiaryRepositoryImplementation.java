@@ -1,6 +1,7 @@
 package repositories;
 
 import data.models.Diary;
+import data.models.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,16 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
     @Override
     public Diary save(Diary diary) {
         diaries.add(diary);
-        return diary;
+        System.out.println(diaries.size());
+        for (Diary diary1 : diaries) {
+            if (Objects.equals(diary.getUsername(), diary1.getUsername())) {
+                diaries.set(diaries.indexOf(diary), diary);
+            } else {
 
+            }
+
+        }
+        return diary;
     }
 
     @Override
@@ -35,6 +44,7 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
 
     @Override
     public long count() {
+        System.out.println(diaries.size());
         return diaries.size();
 
     }
@@ -48,9 +58,10 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
     @Override
     public void delete(String username) {
         Diary diary= findByUsername(username);
-        System.out.println(diary);
+        System.err.println(diary);
         diaries.remove(diary);
-
     }
+
+
 
 }
