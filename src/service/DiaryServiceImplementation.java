@@ -34,6 +34,13 @@ public class DiaryServiceImplementation implements DiaryService{
         diary.setLogStatus(false);
         diaryRepository.save(diary);
     }
+
+    @Override
+    public void createEntry(CreateEntryRequest createEntryRequest) {
+
+
+    }
+
     @Override
     public Long count() {
         return diaryRepository.count();

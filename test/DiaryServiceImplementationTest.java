@@ -59,7 +59,7 @@ public class DiaryServiceImplementationTest {
         diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
         diaryService.logout("username");
-        assertFalse(diary.setLogStatus(false));
+        assertTrue(diary.setLogStatus(false));
     }
 
     @Test

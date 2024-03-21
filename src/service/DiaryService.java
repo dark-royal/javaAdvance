@@ -6,7 +6,8 @@ public interface DiaryService {
     void registerUser(RegisterRequest registerRequest);
     void login(LoginRequest loginReques);
     void logout(String userName);
-    //void addDiaries(AddDiaryRequest addDiaryRequest);
+
+    void createEntry(CreateEntryRequest createEntryRequest);
 
     Long count();
 
