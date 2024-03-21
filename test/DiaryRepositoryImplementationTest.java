@@ -111,7 +111,7 @@ public class DiaryRepositoryImplementationTest {
        repository.save(diary1);
         assertEquals(2,repository.count());
         repository.findAll();
-        assertEquals(0,repository.count());
+        assertEquals(2,repository.count());
 
     }
 

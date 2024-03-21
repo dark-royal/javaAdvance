@@ -30,7 +30,6 @@ public class DiaryServiceImplementation implements DiaryService{
             }
     }
     public void logout(String userName) {
-
         Diary diary = diaryRepository.findByUsername(userName);
         diary.setLogStatus(false);
         diaryRepository.save(diary);

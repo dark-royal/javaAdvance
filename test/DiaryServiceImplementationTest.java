@@ -41,8 +41,8 @@ public class DiaryServiceImplementationTest {
         registerRequest.setPassword("password");
         diaryService.registerUser(registerRequest);
         assertEquals(1,diaryService.count());
-        loginRequest.setUsername(loginRequest.getUsername());
-        loginRequest.setPassword(loginRequest.getPassword());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
         diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
 
@@ -54,8 +54,8 @@ public class DiaryServiceImplementationTest {
         registerRequest.setPassword("password");
         diaryService.registerUser(registerRequest);
         assertEquals(1, diaryService.count());
-        loginRequest.setUsername(loginRequest.getUsername());
-        loginRequest.setPassword(loginRequest.getPassword());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
         diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
         diaryService.logout("username");
@@ -68,9 +68,9 @@ public class DiaryServiceImplementationTest {
         registerRequest.setPassword("password");
         diaryService.registerUser(registerRequest);
         assertEquals(1, diaryService.count());
-        loginRequest.setUsername(loginRequest.getUsername());
-        loginRequest.setPassword(loginRequest.getPassword());
-        assertThrows(IncorrectUsernameException.class,()->diaryService.login(loginRequest));
+        loginRequest.setUsername("username1");
+        loginRequest.setPassword("password");
+        assertThrows(DiaryNotFoundException.class,()->diaryService.login(loginRequest));
 
 
     }
@@ -88,8 +88,8 @@ public class DiaryServiceImplementationTest {
         registerRequest.setPassword("password");
         diaryService.registerUser(registerRequest);
         assertEquals(1, diaryService.count());
-        loginRequest.setUsername(loginRequest.getUsername());
-        loginRequest.setPassword(loginRequest.getPassword());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
         diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
         assertThrows(IncorrectUsernameException.class,()->diaryService.logout("username1"));

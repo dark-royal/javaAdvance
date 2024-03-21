@@ -54,7 +54,6 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
     @Override
     public void delete(Diary diary) {
         diaries.remove(diary);
-
     }
 
 
@@ -96,7 +95,6 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
     public void update(Diary diary) {
         for (Diary diary1 : diaries) {
             if (diary1.getId() == diary.getId()) delete(diary1);
-
             }
         }
     }
