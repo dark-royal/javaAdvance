@@ -3,6 +3,7 @@ package service;
 import ExceptionClass.DiaryNotFoundException;
 import ExceptionClass.IncorrectUsernameException;
 import data.models.Diary;
+import data.models.Entry;
 import dto.request.LoginRequest;
 import repositories.DiaryRepository;
 import repositories.DiaryRepositoryImplementation;
@@ -37,6 +38,13 @@ public class DiaryServiceImplementation implements DiaryService{
 
     @Override
     public void createEntry(CreateEntryRequest createEntryRequest) {
+        Entry entry = new Entry();
+
+        createEntryRequest.setTitle(createEntryRequest.getTitle());
+        createEntryRequest.setBody(createEntryRequest.getBody());
+        createEntryRequest.setDateAndTimeCreated(createEntryRequest.getDateAndTimeCreated());
+
+
 
 
     }

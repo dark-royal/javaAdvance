@@ -14,23 +14,14 @@ public class Entry {
 
     @Override
     public String toString() {
-        return "Entry{" +
-                "id=" + id +
-                ", body='" + body + '\'' +
-                ", title='" + title + '\'' +
-                ", dateCreated=" + dateCreated +
-                '}';
+        return STR."Entry{id=\{id}, body='\{body}\{'\''}, title='\{title}\{'\''}, dateCreated=\{dateCreated}\{'}'}";
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public Entry(int id, String title, String body){
-        this.id = id;
-        this.title = title;
-        this.body = body;
-    }
+
 
     public int getId() {
         return id;
