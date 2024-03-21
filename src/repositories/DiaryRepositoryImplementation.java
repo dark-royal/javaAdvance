@@ -1,36 +1,31 @@
 package repositories;
 
 import data.models.Diary;
-import data.models.Entry;
-import service.IncorrectUsernameException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DiaryRepositoryImplementation implements DiaryRepository {
 
     private List<Diary> diaries = new ArrayList<>();
+    private int counter = 0;
 
     @Override
     public Diary save(Diary diary) {
-        diaries.add(diary);
-        System.out.println(diaries.size());
-        for (Diary diary1 : diaries) {
-            if (Objects.equals(diary.getUsername(), diary1.getUsername())) {
-                diaries.set(diaries.indexOf(diary), diary);
-            } else {
-
-            }
+        if (isNew(diary)) {
+            addIdTo(diary);
+            diaries.add(diary);
+            return diary;
+        } else {
+            update(diary);
+            return diary;
 
         }
-        return diary;
     }
 
     @Override
     public List<Diary> findAll() {
-        return diaries;
-    }
+        return diaries;    }
 
     @Override
     public Diary findByUsername(String username) {
@@ -39,20 +34,14 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
                 return diary;
             }
         }
-    throw new IncorrectUsernameException("invalid username");
+        return null;
+
     }
 
     @Override
     public long count() {
         System.out.println(diaries.size());
         return diaries.size();
-
-    }
-
-    @Override
-    public void delete(Diary diary) {
-        diaries.remove(diary);
-
     }
 
     @Override
@@ -62,6 +51,55 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
         diaries.remove(diary);
     }
 
+    @Override
+    public void delete(Diary diary) {
+        diaries.remove(diary);
+
+    }
 
 
-}
+//        for (Diary diary1 : diaries) {
+//            if (diary.getUsername().equalsIgnoreCase(diary1.getUsername())) {
+//                diaries.set(diaries.indexOf(diary), diary);
+//            } else {
+//                diaries.add(diary);
+//                System.out.println(diaries.size());
+//
+//            }
+//
+//        }
+//        return diary;
+
+
+
+
+
+
+
+
+
+
+
+
+    private void addIdTo(Diary diary) {
+        diary.setId(generateId());
+    }
+
+    private int generateId() {
+        return ++counter;
+    }
+
+    private boolean isNew(Diary diary) {
+        return diary.getId() == 0;
+    }
+
+    public void update(Diary diary) {
+        for (Diary diary1 : diaries) {
+            if (diary1.getId() == diary.getId()) delete(diary1);
+
+            }
+        }
+    }
+
+
+

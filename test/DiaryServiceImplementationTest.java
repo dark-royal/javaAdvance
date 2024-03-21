@@ -1,3 +1,5 @@
+import ExceptionClass.DiaryNotFoundException;
+import ExceptionClass.IncorrectUsernameException;
 import data.models.Diary;
 import dto.request.LoginRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +43,7 @@ public class DiaryServiceImplementationTest {
         assertEquals(1,diaryService.count());
         loginRequest.setUsername(loginRequest.getUsername());
         loginRequest.setPassword(loginRequest.getPassword());
-        diaryService.login("username","password");
+        diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
 
     }
@@ -54,7 +56,7 @@ public class DiaryServiceImplementationTest {
         assertEquals(1, diaryService.count());
         loginRequest.setUsername(loginRequest.getUsername());
         loginRequest.setPassword(loginRequest.getPassword());
-        diaryService.login("username", "password");
+        diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
         diaryService.logout("username");
         assertFalse(diary.setLogStatus(false));
@@ -68,7 +70,7 @@ public class DiaryServiceImplementationTest {
         assertEquals(1, diaryService.count());
         loginRequest.setUsername(loginRequest.getUsername());
         loginRequest.setPassword(loginRequest.getPassword());
-        assertThrows(IncorrectUsernameException.class,()->diaryService.login("username", "password1"));
+        assertThrows(IncorrectUsernameException.class,()->diaryService.login(loginRequest));
 
 
     }
@@ -76,7 +78,7 @@ public class DiaryServiceImplementationTest {
      public void test_user_cannot_login_while_not_registered_throw_diary_not_found_exception(){
         loginRequest.setUsername(loginRequest.getUsername());
         loginRequest.setPassword(loginRequest.getPassword());
-        assertThrows(DiaryNotFoundException.class,()->diaryService.login("username", "password"));
+        assertThrows(DiaryNotFoundException.class,()->diaryService.login(loginRequest));
 
     }
 
@@ -88,7 +90,7 @@ public class DiaryServiceImplementationTest {
         assertEquals(1, diaryService.count());
         loginRequest.setUsername(loginRequest.getUsername());
         loginRequest.setPassword(loginRequest.getPassword());
-        diaryService.login("username", "password");
+        diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
         assertThrows(IncorrectUsernameException.class,()->diaryService.logout("username1"));
         assertTrue(diary.setLogStatus(true));

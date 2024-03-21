@@ -1,10 +1,11 @@
 package service;
 
+import ExceptionClass.DiaryNotFoundException;
+import ExceptionClass.IncorrectUsernameException;
 import data.models.Diary;
+import dto.request.LoginRequest;
 import repositories.DiaryRepository;
 import repositories.DiaryRepositoryImplementation;
-
-import java.util.Objects;
 
 public class DiaryServiceImplementation implements DiaryService{
 
@@ -20,15 +21,13 @@ public class DiaryServiceImplementation implements DiaryService{
     }
 
     @Override
-    public void login(String userName, String password) {
-        try {
-            Diary diary = diaryRepository.findByUsername(userName);
-            if (diary.getUsername().equalsIgnoreCase(userName) && diary.getPassword().equalsIgnoreCase(password)) {
+    public void login(LoginRequest loginRequest) {
+            Diary diary = diaryRepository.findByUsername(loginRequest.getUsername());
+            if(diary == null)throw new DiaryNotFoundException("diary not found");
+            if (!diary.getUsername().equalsIgnoreCase(loginRequest.getUsername()) && diary.getPassword().equalsIgnoreCase(loginRequest.getPassword()))throw new IncorrectUsernameException("invalid username or password");
+                else {
                 diary.setLogStatus(true);
             }
-        } catch (IncorrectUsernameException e) {
-            System.out.println(e.getMessage());
-        }
     }
     public void logout(String userName) {
 
@@ -40,6 +39,7 @@ public class DiaryServiceImplementation implements DiaryService{
     public Long count() {
         return diaryRepository.count();
     }
+
 
 
 }

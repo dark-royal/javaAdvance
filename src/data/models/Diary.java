@@ -5,10 +5,19 @@ public class Diary {
 
     private  String username;
     private  String password;
+    private int id = 0;
     private boolean logStatus;
 
     public boolean isLogStatus() {
         return logStatus;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean setLogStatus(boolean logStatus) {
