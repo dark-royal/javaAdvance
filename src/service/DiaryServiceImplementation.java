@@ -21,27 +21,21 @@ public class DiaryServiceImplementation implements DiaryService{
 
     @Override
     public void login(String userName, String password) {
-        Diary diary = diaryRepository.findByUsername(userName);
-        if(Objects.equals(diary.getUsername(), userName) && Objects.equals(diary.getPassword(), password)){
-            diary.setLogStatus(true);
+        try {
+            Diary diary = diaryRepository.findByUsername(userName);
+            if (diary.getUsername().equalsIgnoreCase(userName) && diary.getPassword().equalsIgnoreCase(password)) {
+                diary.setLogStatus(true);
+            }
+        } catch (IncorrectUsernameException e) {
+            System.out.println(e.getMessage());
         }
-
-        else{
-            throw  new IncorrectUsernameException("username or password is incorrect");
-        }
-
-
     }
-
-    @Override
     public void logout(String userName) {
-    Diary diary = diaryRepository.findByUsername(userName);
-    diary.setLogStatus(false);
-    diaryRepository.save(diary);
+
+        Diary diary = diaryRepository.findByUsername(userName);
+        diary.setLogStatus(false);
+        diaryRepository.save(diary);
     }
-
-
-
     @Override
     public Long count() {
         return diaryRepository.count();

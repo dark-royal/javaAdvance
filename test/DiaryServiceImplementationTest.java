@@ -73,7 +73,7 @@ public class DiaryServiceImplementationTest {
 
     }
     @Test
-     public void test_user_can_add_entry_to_the_diary(){
+     public void test_user_cannot_login_while_not_registered_throw_diary_not_found_exception(){
         loginRequest.setUsername(loginRequest.getUsername());
         loginRequest.setPassword(loginRequest.getPassword());
         assertThrows(DiaryNotFoundException.class,()->diaryService.login("username", "password"));

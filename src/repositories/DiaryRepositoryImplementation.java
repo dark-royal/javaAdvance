@@ -2,6 +2,7 @@ package repositories;
 
 import data.models.Diary;
 import data.models.Entry;
+import service.IncorrectUsernameException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +35,11 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
     @Override
     public Diary findByUsername(String username) {
         for (Diary diary : diaries) {
-            if (Objects.equals(diary.getUsername(), username)) {
+            if (diary.getUsername().equalsIgnoreCase(username)) {
                 return diary;
             }
-
         }
-        return null;
+    throw new IncorrectUsernameException("invalid username");
     }
 
     @Override
