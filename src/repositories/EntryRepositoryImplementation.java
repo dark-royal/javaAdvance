@@ -60,4 +60,6 @@ private List<Entry> entries = new ArrayList<>();
 
 
     }
+
+    private int generateId()
 }
