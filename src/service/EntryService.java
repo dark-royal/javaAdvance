@@ -1,7 +1,7 @@
 package service;
 
 import data.models.Entry;
-import dto.request.LoginRequest;
+import dto.request.CreateEntryRequest;
 
 import java.util.List;
 

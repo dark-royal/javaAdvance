@@ -27,6 +27,14 @@ public class Entry {
         return id;
     }
 
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
     public String getBody() {
         return body;
     }

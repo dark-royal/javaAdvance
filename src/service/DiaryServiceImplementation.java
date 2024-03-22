@@ -1,16 +1,25 @@
 package service;
 
 import ExceptionClass.DiaryNotFoundException;
+import ExceptionClass.EntryNotChangedException;
+import ExceptionClass.EntryNotFoundException;
 import ExceptionClass.IncorrectUsernameException;
 import data.models.Diary;
 import data.models.Entry;
+import dto.request.CreateEntryRequest;
 import dto.request.LoginRequest;
+import dto.request.UpdateRequest;
 import repositories.DiaryRepository;
 import repositories.DiaryRepositoryImplementation;
+import repositories.EntryRepository;
+import repositories.EntryRepositoryImplementation;
 
 public class DiaryServiceImplementation implements DiaryService{
 
+
     private DiaryRepository diaryRepository = new DiaryRepositoryImplementation();
+    private EntryRepository entryRepository = new EntryRepositoryImplementation();
+
     @Override
     public void registerUser(RegisterRequest registerRequest) {
         Diary diary = new Diary();
@@ -40,11 +49,46 @@ public class DiaryServiceImplementation implements DiaryService{
     public void createEntry(CreateEntryRequest createEntryRequest) {
         Entry entry = new Entry();
 
-        createEntryRequest.setTitle(createEntryRequest.getTitle());
-        createEntryRequest.setBody(createEntryRequest.getBody());
-        createEntryRequest.setDateAndTimeCreated(createEntryRequest.getDateAndTimeCreated());
+        entry.setTitle(createEntryRequest.getTitle());
+        entry.setBody(createEntryRequest.getBody());
+        entry.setDateCreated(createEntryRequest.getDateAndTimeCreated());
+        entryRepository.save(entry);
 
 
+
+
+    }
+
+    public void updateEntry(UpdateRequest updateRequest) {
+        String title = updateRequest.getTitle();
+        String body = updateRequest.getBody();
+        Entry entry = findEntry(title);
+
+        if(entry == null)throw new EntryNotFoundException("entry not found");
+
+        if(entry.getBody().equals(body)){
+            throw new EntryNotChangedException("entry was not updated");
+        }
+
+        entry.setTitle(updateRequest.getTitle());
+        entry.setBody(updateRequest.getBody());
+        entry.setId(updateRequest.getId());
+        entryRepository.save(entry);
+
+    }
+
+    public Entry findEntry(String title) {
+        for (Entry entry: entryRepository.findAll()){
+            if(entry.getTitle().equals(title)){
+                return entry;
+            }
+        }
+        throw new EntryNotFoundException("entry not found");
+    }
+
+    public void deleteEntry(String title){
+        Entry entry = findEntry(title);
+        entryRepository.delete(entry);
 
 
     }

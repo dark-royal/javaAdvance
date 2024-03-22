@@ -1,5 +1,6 @@
 package service;
 
+import dto.request.CreateEntryRequest;
 import dto.request.LoginRequest;
 
 public interface DiaryService {
