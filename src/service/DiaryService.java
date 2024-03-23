@@ -14,12 +14,15 @@ public interface DiaryService {
     void logout(String userName);
     List<Diary> getAll();
 
+    Entry findEntry(String title);
+
     Entry createEntry(CreateEntryRequest createEntryRequest);
 
     Entry updateEntry(UpdateRequest updateRequest);
 
     Long count();
     int countEntries();
+    void deleteEntry(String title);
 
 
 

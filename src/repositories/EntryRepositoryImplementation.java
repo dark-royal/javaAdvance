@@ -12,7 +12,7 @@ private  int id = 0;
 
     @Override
     public Entry save(Entry entry) {
-        entries.addAll(entries);
+        entries.add(entry);
         return entry;
 
     }

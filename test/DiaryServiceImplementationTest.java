@@ -1,5 +1,5 @@
 import ExceptionClass.DiaryNotFoundException;
-import ExceptionClass.IncorrectUsernameException;
+import ExceptionClass.EntryNotFoundException;
 import data.models.Diary;
 import data.models.Entry;
 import dto.request.CreateEntryRequest;
@@ -7,7 +7,9 @@ import dto.request.UpdateRequest;
 import dto.request.LoginRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import repositories.EntryRepositoryImplementation;
 import service.*;
+import repositories.EntryRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +20,7 @@ public class DiaryServiceImplementationTest {
     private LoginRequest loginRequest;
     private CreateEntryRequest createEntryRequest;
     private Diary diary;
+
 
     private UpdateRequest updateRequest;
 
@@ -139,17 +142,99 @@ public class DiaryServiceImplementationTest {
         Entry entyr1 = diaryService.createEntry(createEntryRequest);
         assertEquals(1, diaryService.count());
         updateRequest.setTitle("semicolon");
-        diary.createEntry("title","body");
-        diary.updateEntry(1,"new title","new body");
-        Entry foundEntry = diaryRfindEntryById(1);
-        assertEquals("new title",foundEntry.getTitle());
-        assertEquals("new body",foundEntry.getBody());
-
+        updateRequest.setBody("change");
+        diaryService.updateEntry(updateRequest);
         //System.out.println(STR."\{updateRequest.getId()} nothing");
-        assertEquals(1, diaryService.updateEntry(updateRequest).getTitle());
+        assertEquals("semicolon", diaryService.updateEntry(updateRequest));
+        assertEquals("change",diaryService.updateEntry(updateRequest));
 
 
     }
 
+    @Test
+    public void userCanRegister_login_createEntry_findEntry(){
+        registerRequest.setUsername("username");
+        registerRequest.setPassword("password");
+        diaryService.registerUser(registerRequest);
+        assertEquals(1, diaryService.count());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
+        diaryService.login(loginRequest);
+        assertTrue(diary.setLogStatus(true));
+        createEntryRequest.setTitle("semicolon");
+        createEntryRequest.setBody("i love semicolon");
+        System.out.println(createEntryRequest.getDateAndTimeCreated());
+        diaryService.createEntry(createEntryRequest);
+        assertEquals(1,diaryService.count());
+        Entry entry = diaryService.findEntry("semicolon");
+        assertEquals(entry,diaryService.findEntry("semicolon"));
+
 
     }
+
+    @Test
+    public void userCanRegister_login_createEntry_deleteEntry(){
+        registerRequest.setUsername("username");
+        registerRequest.setPassword("password");
+        diaryService.registerUser(registerRequest);
+        assertEquals(1, diaryService.count());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
+        diaryService.login(loginRequest);
+        assertTrue(diary.setLogStatus(true));
+        createEntryRequest.setTitle("semicolon");
+        createEntryRequest.setBody("i love semicolon");
+        System.out.println(createEntryRequest.getDateAndTimeCreated());
+        diaryService.createEntry(createEntryRequest);
+        assertEquals(1,diaryService.count());
+        Entry entry = diaryService.findEntry("semicolon");
+        assertEquals(entry,diaryService.findEntry("semicolon"));
+        diaryService.deleteEntry("semicolon");
+        assertEquals(0,diaryService.countEntries());
+
+    }
+
+    @Test
+    public void userCanRegister_login_createEntry_findEntryWithIncorrectPassword(){
+        registerRequest.setUsername("username");
+        registerRequest.setPassword("password");
+        diaryService.registerUser(registerRequest);
+        assertEquals(1, diaryService.count());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
+        diaryService.login(loginRequest);
+        assertTrue(diary.setLogStatus(true));
+        createEntryRequest.setTitle("semicolon");
+        createEntryRequest.setBody("i love semicolon");
+        System.out.println(createEntryRequest.getDateAndTimeCreated());
+        diaryService.createEntry(createEntryRequest);
+        assertEquals(1,diaryService.count());
+        assertThrows(EntryNotFoundException.class,()->diaryService.findEntry("semicoloni"));
+
+
+    }
+
+    @Test
+    public void userCanRegister_login_createEntry_findEntry_deleteEntryWithIncorrectPassword() {
+        registerRequest.setUsername("username");
+        registerRequest.setPassword("password");
+        diaryService.registerUser(registerRequest);
+        assertEquals(1, diaryService.count());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
+        diaryService.login(loginRequest);
+        assertTrue(diary.setLogStatus(true));
+        createEntryRequest.setTitle("semicolon");
+        createEntryRequest.setBody("i love semicolon");
+        System.out.println(createEntryRequest.getDateAndTimeCreated());
+        diaryService.createEntry(createEntryRequest);
+        assertEquals(1, diaryService.count());
+        Entry entry = diaryService.findEntry("semicolon");
+        assertEquals(entry, diaryService.findEntry("semicolon"));
+        assertThrows(EntryNotFoundException.class,()->diaryService.deleteEntry("semicoloni"));
+    }
+
+
+
+
+}

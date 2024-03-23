@@ -63,7 +63,6 @@ public class DiaryServiceImplementation implements DiaryService{
         String title = updateRequest.getTitle();
         String body = updateRequest.getBody();
         Entry entry = findEntry(title);
-//        if(entry == null)throw new EntryNotFoundException("entry not found");
         if(entry.getBody().equals(body)){
             throw new EntryNotChangedException("entry was not updated");
         }

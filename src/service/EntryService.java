@@ -2,15 +2,16 @@ package service;
 
 import data.models.Entry;
 import dto.request.CreateEntryRequest;
+import dto.request.UpdateRequest;
 
 import java.util.List;
 
 public interface EntryService {
-    void createEntry(CreateEntryRequest createEntryRequest);
+    Entry createEntry(CreateEntryRequest createEntryRequest);
     void deleteEntry(int id);
-    void updateEntry(String userName);
+    void updateEntry(UpdateRequest updateRequest);
 
-    List<Entry> findEntryById();
+    Entry findEntryById(int id);
 
     Long count();
 

@@ -16,7 +16,7 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntriesCanAddOneEntry() {
-        Entry entry = new Entry();
+        Entry entry = new Entry(1,"body","title");
         repository.save(entry);
         assertEquals(1, repository.count());
 
@@ -24,7 +24,7 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntriesCanAddTwoEntry() {
-        Entry entry = new Entry();
+        Entry entry = new Entry(1,"body","title");
         repository.save(entry);
         repository.save(entry);
         assertEquals(2, repository.count());
@@ -35,9 +35,9 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntryCanAddTwoEntry_removeOneEntry() {
-        Entry entry = new Entry();
+        Entry entry = new Entry(1,"body","title");
         repository.save(entry);
-        Entry entry1 = new Entry();
+        Entry entry1 = new Entry(2,"body1","title1");
         repository.save(entry1);
         repository.delete(1);
         assertEquals(1, repository.count());
@@ -46,7 +46,7 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntryCanAddEntry_removeOneEntry() {
-        Entry entry = new Entry();
+        Entry entry = new Entry(1,"body","title");
         repository.save(entry);
         repository.delete(1);
         assertEquals(0, repository.count());
@@ -56,9 +56,9 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntryCanAddTwoEntry_removeTwoEntry() {
-        Entry entry = new Entry();
+        Entry entry = new Entry(1,"body","title");
         repository.save(entry);
-        Entry entry1 = new Entry();
+        Entry entry1 = new Entry(2,"body","title");
         repository.save(entry1);
         repository.delete(1);
         repository.delete(2);
@@ -68,7 +68,7 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntryCanAddEntry_removeOneEntryByTheObject() {
-        Entry entry = new Entry();
+        Entry entry = new Entry(1, "body","title");
         repository.save(entry);
         repository.delete(entry);
         assertEquals(0, repository.count());
@@ -77,9 +77,9 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntryCanAddThreeEntry_removeTwoEntry() {
-        Entry entry = new Entry();
+        Entry entry = new Entry(1,"body","title");
         repository.save(entry);
-        Entry entry1 = new Entry();
+        Entry entry1 = new Entry(2,"body1","title1");
         repository.save(entry);
         repository.delete(entry);
         repository.delete(entry1);
@@ -89,7 +89,7 @@ public class EntryRepositoryImplementationTest {
 
     @Test
     public void testThatEntriesCanFindAllEntry(){
-        Entry entry = new Entry();
+        Entry entry = new Entry(1,"body","title");
         repository.save(entry);
         repository.save(entry);
         repository.findAll();
