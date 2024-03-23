@@ -3,6 +3,17 @@ package data.models;
 import java.time.LocalDateTime;
 
 public class Entry {
+    public Entry(int id, String body, String title, LocalDateTime dateCreated) {
+        this.id = id;
+        this.body = body;
+        this.title = title;
+        this.dateCreated = dateCreated;
+    }
+
+    public Entry(){
+
+    }
+
     private int id;
     private String body;
     private String title;

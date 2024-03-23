@@ -1,5 +1,6 @@
 package repositories;
 
+import ExceptionClass.DiaryNotFoundException;
 import data.models.Diary;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
             return diary;
         } else {
             update(diary);
+            diaries.add(diary);
             return diary;
 
         }
@@ -34,7 +36,7 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
                 return diary;
             }
         }
-        return null;
+        throw new DiaryNotFoundException("diary not found");
 
     }
 
@@ -57,29 +59,6 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
     }
 
 
-//        for (Diary diary1 : diaries) {
-//            if (diary.getUsername().equalsIgnoreCase(diary1.getUsername())) {
-//                diaries.set(diaries.indexOf(diary), diary);
-//            } else {
-//                diaries.add(diary);
-//                System.out.println(diaries.size());
-//
-//            }
-//
-//        }
-//        return diary;
-
-
-
-
-
-
-
-
-
-
-
-
     private void addIdTo(Diary diary) {
         diary.setId(generateId());
     }
@@ -95,6 +74,7 @@ public class DiaryRepositoryImplementation implements DiaryRepository {
     public void update(Diary diary) {
         for (Diary diary1 : diaries) {
             if (diary1.getId() == diary.getId()) delete(diary1);
+            break;
             }
         }
     }

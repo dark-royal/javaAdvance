@@ -1,6 +1,9 @@
 import ExceptionClass.DiaryNotFoundException;
 import ExceptionClass.IncorrectUsernameException;
 import data.models.Diary;
+import data.models.Entry;
+import dto.request.CreateEntryRequest;
+import dto.request.UpdateRequest;
 import dto.request.LoginRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,10 @@ public class DiaryServiceImplementationTest {
     private DiaryService diaryService;
     private RegisterRequest registerRequest;
     private LoginRequest loginRequest;
+    private CreateEntryRequest createEntryRequest;
     private Diary diary;
+
+    private UpdateRequest updateRequest;
 
     @BeforeEach
     public void initializer(){
@@ -21,6 +27,8 @@ public class DiaryServiceImplementationTest {
         registerRequest = new RegisterRequest();
         loginRequest = new LoginRequest();
         diary = new Diary();
+        createEntryRequest = new CreateEntryRequest();
+        updateRequest = new UpdateRequest();
 
     }
 
@@ -59,7 +67,7 @@ public class DiaryServiceImplementationTest {
         diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
         diaryService.logout("username");
-        assertTrue(diary.setLogStatus(false));
+        assertFalse(diary.setLogStatus(false));
     }
 
     @Test
@@ -92,10 +100,56 @@ public class DiaryServiceImplementationTest {
         loginRequest.setPassword("password");
         diaryService.login(loginRequest);
         assertTrue(diary.setLogStatus(true));
-        assertThrows(IncorrectUsernameException.class,()->diaryService.logout("username1"));
+        assertThrows(DiaryNotFoundException.class,()->diaryService.logout("username1"));
         assertTrue(diary.setLogStatus(true));
     }
 
+    @Test
+    public void userCanRegister_Login_createEntry(){
+        registerRequest.setUsername("username");
+        registerRequest.setPassword("password");
+        diaryService.registerUser(registerRequest);
+        assertEquals(1, diaryService.count());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
+        diaryService.login(loginRequest);
+        assertTrue(diary.setLogStatus(true));
+        createEntryRequest.setTitle("semicolon");
+        createEntryRequest.setBody("i love semicolon");
+        System.out.println(createEntryRequest.getDateAndTimeCreated());
+        diaryService.createEntry(createEntryRequest);
+        assertEquals(1,diaryService.count());
 
 
-}
+    }
+
+    @Test
+    public void userCanRegister_Login_createEntry_andCanUpdateTheEntry() {
+        registerRequest.setUsername("username");
+        registerRequest.setPassword("password");
+        diaryService.registerUser(registerRequest);
+        assertEquals(1, diaryService.count());
+        loginRequest.setUsername("username");
+        loginRequest.setPassword("password");
+        diaryService.login(loginRequest);
+        assertTrue(diary.setLogStatus(true));
+        createEntryRequest.setTitle("semicolon");
+        createEntryRequest.setBody("i love semicolon");
+        System.out.println(createEntryRequest.getDateAndTimeCreated());
+        Entry entyr1 = diaryService.createEntry(createEntryRequest);
+        assertEquals(1, diaryService.count());
+        updateRequest.setTitle("semicolon");
+        diary.createEntry("title","body");
+        diary.updateEntry(1,"new title","new body");
+        Entry foundEntry = diaryRfindEntryById(1);
+        assertEquals("new title",foundEntry.getTitle());
+        assertEquals("new body",foundEntry.getBody());
+
+        //System.out.println(STR."\{updateRequest.getId()} nothing");
+        assertEquals(1, diaryService.updateEntry(updateRequest).getTitle());
+
+
+    }
+
+
+    }

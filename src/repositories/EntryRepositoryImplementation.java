@@ -8,18 +8,11 @@ import java.util.List;
 
 public class EntryRepositoryImplementation implements EntryRepository{
 private List<Entry> entries = new ArrayList<>();
+private  int id = 0;
 
     @Override
     public Entry save(Entry entry) {
-        for (Entry entry1 : entries){
-            if (entry.getId() == entry1.getId()){
-                entries.set(entries.indexOf(entry), entry);
-            }else {
-                entries.add(entry);
-            }
-
-
-        }
+        entries.addAll(entries);
         return entry;
 
     }
@@ -61,5 +54,10 @@ private List<Entry> entries = new ArrayList<>();
 
     }
 
-    private int generateId()
+    public int generateId(){
+        return ++id;
+    }
+
+
+
 }
