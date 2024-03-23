@@ -1,4 +1,4 @@
-package data.models;
+package diaryPackage.data.models;
 
 import java.time.LocalDateTime;
 

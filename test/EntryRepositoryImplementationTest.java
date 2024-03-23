@@ -1,8 +1,8 @@
-import data.models.Entry;
+import diaryPackage.data.models.Entry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repositories.EntryRepository;
-import repositories.EntryRepositoryImplementation;
+import diaryPackage.repositories.EntryRepository;
+import diaryPackage.repositories.EntryRepositoryImplementation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

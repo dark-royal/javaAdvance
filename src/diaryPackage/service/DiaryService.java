@@ -1,10 +1,11 @@
-package service;
+package diaryPackage.service;
 
-import data.models.Diary;
-import data.models.Entry;
-import dto.request.CreateEntryRequest;
-import dto.request.LoginRequest;
-import dto.request.UpdateRequest;
+import diaryPackage.data.models.Diary;
+import diaryPackage.data.models.Entry;
+import diaryPackage.dto.request.CreateEntryRequest;
+import diaryPackage.dto.request.LoginRequest;
+import diaryPackage.dto.request.RegisterRequest;
+import diaryPackage.dto.request.UpdateRequest;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package service;
+package diaryPackage.dto.request;
 
 public class RegisterRequest {
     private String username;

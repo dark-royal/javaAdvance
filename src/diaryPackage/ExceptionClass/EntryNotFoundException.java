@@ -1,4 +1,4 @@
-package ExceptionClass;
+package diaryPackage.ExceptionClass;
 
 public class EntryNotFoundException extends RuntimeException {
 

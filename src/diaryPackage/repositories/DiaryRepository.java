@@ -1,6 +1,6 @@
-package repositories;
-
-import data.models.Diary;
+package diaryPackage.repositories;
+import diaryPackage.data.models.Diary;
+//import data.models.Diary;
 
 import java.util.List;
 

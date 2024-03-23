@@ -1,4 +1,4 @@
-package ExceptionClass;
+package diaryPackage.ExceptionClass;
 
 public class DiaryNotFoundException extends  RuntimeException {
     public DiaryNotFoundException(String message){

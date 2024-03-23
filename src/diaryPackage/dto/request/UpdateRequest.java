@@ -1,4 +1,4 @@
-package dto.request;
+package diaryPackage.dto.request;
 
 public class UpdateRequest {
     public String getBody() {

@@ -1,4 +1,4 @@
-package dto.request;
+package diaryPackage.dto.request;
 
 public class LoginRequest {
     private String username;

@@ -1,15 +1,15 @@
-import ExceptionClass.DiaryNotFoundException;
-import ExceptionClass.EntryNotFoundException;
-import data.models.Diary;
-import data.models.Entry;
-import dto.request.CreateEntryRequest;
-import dto.request.UpdateRequest;
-import dto.request.LoginRequest;
+import diaryPackage.ExceptionClass.DiaryNotFoundException;
+import diaryPackage.ExceptionClass.EntryNotFoundException;
+import diaryPackage.data.models.Diary;
+import diaryPackage.data.models.Entry;
+import diaryPackage.dto.request.RegisterRequest;
+import diaryPackage.service.DiaryService;
+import diaryPackage.service.DiaryServiceImplementation;
+import diaryPackage.dto.request.CreateEntryRequest;
+import diaryPackage.dto.request.UpdateRequest;
+import diaryPackage.dto.request.LoginRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repositories.EntryRepositoryImplementation;
-import service.*;
-import repositories.EntryRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 

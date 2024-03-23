@@ -1,4 +1,6 @@
-package data.models;
+package diaryPackage.data.models;
+
+import jdk.jfr.DataAmount;
 
 public class Diary {
 
